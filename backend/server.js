@@ -8,11 +8,24 @@ const { isValidCode, isValidUrl, randomCode } = require('./utils/validate');
 
 const PORT = process.env.PORT || 4000;
 const BASE_URL = process.env.BASE_URL || 'http://localhost:' + PORT;
-
 const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://tiny-link-virid-theta.vercel.app"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: "GET,POST,DELETE",
+}));
 
 // healthz
 app.get('/healthz', (req, res) => {
