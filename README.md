@@ -171,12 +171,3 @@ const allowedOrigins = [
 ];
 ```
 
-## 📄 License
-
-MIT © [Your Name]
-
----
-
-<p align="center">
-  Built with ❤️ using Next.js, Express, and MongoDB
-</p>
